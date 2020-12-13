@@ -1,0 +1,57 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+
+class Searchbar extends Component {
+  state = {
+    inputValue: '',
+  };
+
+  onInputValue = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  onSubmitSearchForm = e => {
+    e.preventDefault();
+    const { inputValue } = this.state;
+    this.props.onSubmitForm(inputValue);
+    this.setState({ inputValue: '' });
+  };
+
+  render() {
+    const { inputValue } = this.state;
+    return (
+      <>
+        <header className="Searchbar">
+          <form
+            id={uuid()}
+            onSubmit={this.onSubmitSearchForm}
+            className="SearchForm"
+          >
+            <button type="submit" className="SearchForm-button">
+              <span className="SearchForm-button-label">Search</span>
+            </button>
+            <input
+              className="SearchForm-input"
+              type="text"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images and photos"
+              name="inputValue"
+              value={inputValue}
+              id={uuid()}
+              onChange={this.onInputValue}
+            />
+          </form>
+        </header>
+      </>
+    );
+  }
+}
+
+Searchbar.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+};
+
+export default Searchbar;
