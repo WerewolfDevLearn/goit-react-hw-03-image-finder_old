@@ -57,8 +57,7 @@ class App extends Component {
   fetchImage = () => {
     const { keyword, page } = this.state;
     this.setState({ loading: true });
-    imageApi
-      .fetchImageWithKeyword(keyword, page)
+    imageApi(keyword, page)
       .then(data =>
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],

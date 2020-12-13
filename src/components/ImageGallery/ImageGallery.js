@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 
-function ImageGallery({ images, onImageClick, showModalOnClick }) {
+function ImageGallery({ images, onImageClick }) {
   return (
     <ul className="ImageGallery">
       {images.map(image => (
         <li
           key={image.id}
           className="ImageGalleryItem"
-          onClick={showModalOnClick}
+          // onClick={showModalOnClick}
         >
           <ImageGalleryItem
             webformatURL={image.webformatURL}
@@ -34,7 +34,6 @@ ImageGallery.propTypes = {
     }),
   ),
   onImageClick: PropTypes.func.isRequired,
-  showModalOnClick: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;
