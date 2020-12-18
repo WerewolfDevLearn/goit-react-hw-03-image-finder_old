@@ -11,16 +11,14 @@ function ImageGalleryItem({
     onImageClick({ url: e.target.dataset.largeimageurl, alt: e.target.alt });
   };
   return (
-    <>
-      <img
-        src={webformatURL}
-        alt={alt}
-        className="ImageGalleryItem-image"
-        data-largeimageurl={largeImageURL}
-        data-id={id}
-        onClick={getlargeImageURL}
-      />
-    </>
+    <img
+      src={webformatURL}
+      alt={alt}
+      className="ImageGalleryItem-image"
+      data-largeimageurl={largeImageURL}
+      data-id={id}
+      onClick={getlargeImageURL}
+    />
   );
 }
 

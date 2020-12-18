@@ -32,7 +32,7 @@ ImageGallery.propTypes = {
       largeImageURL: PropTypes.string.isRequired,
       tags: PropTypes.string.isRequired,
     }),
-  ),
+  ).isRequired,
   onImageClick: PropTypes.func.isRequired,
 };
 

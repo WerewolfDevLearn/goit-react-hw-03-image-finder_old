@@ -6,7 +6,11 @@ const fetchImageWithKeyword = (keyword, page) => {
     .get(
       `https://pixabay.com/api/?key=${apiKey}&q=${keyword}&image_type=photo&page=${page}&per_page=12`,
     )
-    .then(response => response.data);
+    .then(response => {
+      // console.log(response);
+      console.log(response.data);
+      return response.data;
+    });
 };
 
 export default fetchImageWithKeyword;

@@ -14,6 +14,7 @@ class App extends Component {
     error: null,
     keyword: '',
     page: 1,
+    lastPage: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,6 +31,7 @@ class App extends Component {
       keyword: query,
       page: 1,
       images: [],
+      lastPage: false,
     });
   };
 
@@ -41,10 +43,12 @@ class App extends Component {
     this.setState({ largeImageURL: null });
   };
 
-  showLargeImg = () => {
-    const largeImage = this.state.largeImageURL;
-
-    return largeImage;
+  isLastPage = data => {
+    console.log(this.state.images.length);
+    console.log(data.totalHits);
+    if (this.state.images.length === data.totalHits) {
+      this.setState({ lastPage: true });
+    }
   };
 
   scrollDown() {
@@ -58,18 +62,20 @@ class App extends Component {
     const { keyword, page } = this.state;
     this.setState({ loading: true });
     imageApi(keyword, page)
-      .then(data =>
+      .then(data => {
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
           page: prevState.page + 1,
-        })),
-      )
+        }));
+
+        this.isLastPage(data);
+      })
       .catch(error => this.setState({ error }))
       .finally(() => this.setState({ loading: false }));
   };
 
   render() {
-    const { images, loading, error, largeImageURL } = this.state;
+    const { images, loading, error, largeImageURL, lastPage } = this.state;
     return (
       <>
         <Searchbar onSubmitForm={this.onSubmitForm} />
@@ -78,10 +84,10 @@ class App extends Component {
         )}
         {largeImageURL && (
           <Modal onCloseModal={this.hideLargeImage}>
-            <ModalImage largeImage={this.showLargeImg()} />
+            <ModalImage largeImage={largeImageURL} />
           </Modal>
         )}
-        {images.length > 0 && (
+        {images.length > 0 && !lastPage && !loading && (
           <Button text="Load more" buttonAction={this.fetchImage} />
         )}
         {loading && <Loader />}

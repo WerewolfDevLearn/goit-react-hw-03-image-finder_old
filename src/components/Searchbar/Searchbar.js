@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
 
 class Searchbar extends Component {
   state = {
@@ -22,30 +21,28 @@ class Searchbar extends Component {
   render() {
     const { inputValue } = this.state;
     return (
-      <>
-        <header className="Searchbar">
-          <form
-            id={uuid()}
-            onSubmit={this.onSubmitSearchForm}
-            className="SearchForm"
-          >
-            <button type="submit" className="SearchForm-button">
-              <span className="SearchForm-button-label">Search</span>
-            </button>
-            <input
-              className="SearchForm-input"
-              type="text"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search images and photos"
-              name="inputValue"
-              value={inputValue}
-              id={uuid()}
-              onChange={this.onInputValue}
-            />
-          </form>
-        </header>
-      </>
+      <header className="Searchbar">
+        <form
+          id="form"
+          onSubmit={this.onSubmitSearchForm}
+          className="SearchForm"
+        >
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">Search</span>
+          </button>
+          <input
+            className="SearchForm-input"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            name="inputValue"
+            value={inputValue}
+            id="input"
+            onChange={this.onInputValue}
+          />
+        </form>
+      </header>
     );
   }
 }
